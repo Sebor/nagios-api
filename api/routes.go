@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/sulochan/go-nagios-api/auth"
+	"github.com/Sebor/nagios-api/auth"
 
 	"github.com/justinas/alice"
 )
