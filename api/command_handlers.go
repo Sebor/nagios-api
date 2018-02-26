@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 // All external commands https://old.nagios.org/developerinfo/externalcommands/commandlist.php
@@ -604,6 +605,16 @@ func (a *Api) HandleScheduleForcedHostCheck(w http.ResponseWriter, r *http.Reque
 // SCHEDULE_FORCED_HOST_SVC_CHECKS
 // SCHEDULE_FORCED_HOST_SVC_CHECKS;<host_name>;<check_time>
 func (a *Api) HandleScheduleForcedHostServiceChecks(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var host struct{ Hostname string }
+	err := decoder.Decode(&host)
+	if err != nil {
+		http.Error(w, "Could not decode request body", 400)
+		return
+	}
+
+	command := fmt.Sprintf("%s;%s;[%d]", "SCHEDULE_FORCED_HOST_SVC_CHECKS", host.Hostname, time.Now().Unix())
+	a.WriteCommandToFile(w, command)
 }
 
 // SCHEDULE_FORCED_SVC_CHECK
