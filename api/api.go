@@ -15,6 +15,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Api struct
 type Api struct {
 	router          *mux.Router
 	addr            string
@@ -35,7 +36,8 @@ func stringInSlice(a string, list []string) bool {
 	return false
 }
 
-func NewApi(addr, fileObjectCache, fileCommand, fileStatus string) *Api {
+// NewAPI create new api object
+func NewAPI(addr, fileObjectCache, fileCommand, fileStatus string) *Api {
 	api := &Api{
 		addr:            addr,
 		router:          mux.NewRouter(),
@@ -112,9 +114,9 @@ func readObjectCache(in io.Reader) (*StaticData, error) {
 				if i == "define hostgroup {" || strings.TrimSpace(i) == "}" || i == "" {
 					// Ignore these lines
 				} else {
-          if(len(strings.Fields(i)) != 0){
-            thisgroup[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
-          }
+					if len(strings.Fields(i)) != 0 {
+						thisgroup[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
+					}
 				}
 			}
 			data.hostgroupList = append(data.hostgroupList, thisgroup)
@@ -126,9 +128,9 @@ func readObjectCache(in io.Reader) (*StaticData, error) {
 				if i == "define contact {" || strings.TrimSpace(i) == "}" || i == "" {
 					// Ignore these lines
 				} else {
-          if(len(strings.Fields(i)) != 0) {
-					  thiscontact[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
-				  }
+					if len(strings.Fields(i)) != 0 {
+						thiscontact[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
+					}
 				}
 			}
 			data.contactList = append(data.contactList, thiscontact)
@@ -140,9 +142,9 @@ func readObjectCache(in io.Reader) (*StaticData, error) {
 				if i == "define host {" || strings.TrimSpace(i) == "}" || i == "" {
 					// Ignore these lines
 				} else {
-          if(len(strings.Fields(i)) != 0) {
-					  thishost[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
-			    }
+					if len(strings.Fields(i)) != 0 {
+						thishost[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
+					}
 				}
 			}
 			data.hostList = append(data.hostList, thishost)
@@ -154,9 +156,9 @@ func readObjectCache(in io.Reader) (*StaticData, error) {
 				if i == "define service {" || strings.TrimSpace(i) == "}" || i == "" {
 					// Ignore these lines
 				} else {
-          if(len(strings.Fields(i)) != 0) {
-					  thisservice[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
-			    }
+					if len(strings.Fields(i)) != 0 {
+						thisservice[strings.TrimSpace(strings.Fields(i)[0])] = strings.Join(strings.Fields(i)[1:], " ")
+					}
 				}
 			}
 			data.serviceList = append(data.serviceList, thisservice)
