@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// ContactStatus struct
 type ContactStatus struct {
 	ContactName                 string            `json:"contact_name"`
 	HostNotificationPeriod      string            `json:"host_notification_period"`
@@ -20,6 +21,8 @@ type ContactStatus struct {
 	ServiceNotificationsEnabled string            `json:"service_notifications_enabled"`
 	CustomVariables             map[string]string `json:"custom_variables,omitempty"`
 }
+
+// HostStatus struct
 type HostStatus struct {
 	AcknowledgementType        string            `json:"acknowledgement_type"`
 	ActiveChecksEnabled        string            `json:"active_checks_enabled"`
@@ -31,10 +34,10 @@ type HostStatus struct {
 	CheckPeriod                string            `json:"check_period"`
 	CheckType                  string            `json:"check_type"`
 	CurrentAttempt             string            `json:"current_attempt"`
-	CurrentEventId             string            `json:"current_event_id"`
-	CurrentNotificationId      string            `json:"current_notification_id"`
+	CurrentEventID             string            `json:"current_event_id"`
+	CurrentNotificationID      string            `json:"current_notification_id"`
 	CurrentNotificationNumber  string            `json:"current_notification_number"`
-	CurrentProblemId           string            `json:"current_problem_id"`
+	CurrentProblemID           string            `json:"current_problem_id"`
 	CurrentState               string            `json:"current_state"`
 	EventHandler               string            `json:"event_handler"`
 	EventHandlerEnabled        string            `json:"event_handler_enabled"`
@@ -43,11 +46,11 @@ type HostStatus struct {
 	HostName                   string            `json:"host_name"`
 	IsFlapping                 string            `json:"is_flapping"`
 	LastCheck                  string            `json:"last_check"`
-	LastEventId                string            `json:"last_event_id"`
+	LastEventID                string            `json:"last_event_id"`
 	LastHardState              string            `json:"last_hard_state"`
 	LastHardStateChange        string            `json:"last_hard_state_change"`
 	LastNotification           string            `json:"last_notification"`
-	LastProblemId              string            `json:"last_problem_id"`
+	LastProblemID              string            `json:"last_problem_id"`
 	LastStateChange            string            `json:"last_state_change"`
 	LastTimeDown               string            `json:"last_time_down"`
 	LastTimeUnreachable        string            `json:"last_time_unreachable"`
@@ -74,6 +77,8 @@ type HostStatus struct {
 	StateType                  string            `json:"state_type"`
 	CustomVariables            map[string]string `json:"custom_variables,omitempty"`
 }
+
+// ProgramStatus struct
 type ProgramStatus struct {
 	ActiveHostChecksEnabled          string            `json:"active_host_checks_enabled"`
 	ActiveOndemandHostCheckStats     string            `json:"active_ondemand_host_check_stats"`
@@ -96,11 +101,11 @@ type ProgramStatus struct {
 	ModifiedHostAttributes           string            `json:"modified_host_attributes"`
 	ModifiedServiceAttributes        string            `json:"modified_service_attributes"`
 	NagiosPid                        string            `json:"nagios_pid"`
-	NextCommentId                    string            `json:"next_comment_id"`
-	NextDowntimeId                   string            `json:"next_downtime_id"`
-	NextEventId                      string            `json:"next_event_id"`
-	NextNotificationId               string            `json:"next_notification_id"`
-	NextProblemId                    string            `json:"next_problem_id"`
+	NextCommentID                    string            `json:"next_comment_id"`
+	NextDowntimeID                   string            `json:"next_downtime_id"`
+	NextEventID                      string            `json:"next_event_id"`
+	NextNotificationID               string            `json:"next_notification_id"`
+	NextProblemID                    string            `json:"next_problem_id"`
 	ObsessOverHosts                  string            `json:"obsess_over_hosts"`
 	ObsessOverServices               string            `json:"obsess_over_services"`
 	ParallelHostCheckStats           string            `json:"parallel_host_check_stats"`
@@ -113,6 +118,8 @@ type ProgramStatus struct {
 	SerialHostCheckStats             string            `json:"serial_host_check_stats"`
 	CustomVariables                  map[string]string `json:"custom_variables,omitempty"`
 }
+
+// ServiceStatus struct
 type ServiceStatus struct {
 	AcknowledgementType        string            `json:"acknowledgement_type"`
 	ActiveChecksEnabled        string            `json:"active_checks_enabled"`
@@ -124,10 +131,10 @@ type ServiceStatus struct {
 	CheckPeriod                string            `json:"check_period"`
 	CheckType                  string            `json:"check_type"`
 	CurrentAttempt             string            `json:"current_attempt"`
-	CurrentEventId             string            `json:"current_event_id"`
-	CurrentNotificationId      string            `json:"current_notification_id"`
+	CurrentEventID             string            `json:"current_event_id"`
+	CurrentNotificationID      string            `json:"current_notification_id"`
 	CurrentNotificationNumber  string            `json:"current_notification_number"`
-	CurrentProblemId           string            `json:"current_problem_id"`
+	CurrentProblemID           string            `json:"current_problem_id"`
 	CurrentState               string            `json:"current_state"`
 	EventHandler               string            `json:"event_handler"`
 	EventHandlerEnabled        string            `json:"event_handler_enabled"`
@@ -136,11 +143,11 @@ type ServiceStatus struct {
 	HostName                   string            `json:"host_name"`
 	IsFlapping                 string            `json:"is_flapping"`
 	LastCheck                  string            `json:"last_check"`
-	LastEventId                string            `json:"last_event_id"`
+	LastEventID                string            `json:"last_event_id"`
 	LastHardState              string            `json:"last_hard_state"`
 	LastHardStateChange        string            `json:"last_hard_state_change"`
 	LastNotification           string            `json:"last_notification"`
-	LastProblemId              string            `json:"last_problem_id"`
+	LastProblemID              string            `json:"last_problem_id"`
 	LastStateChange            string            `json:"last_state_change"`
 	LastTimeCritical           string            `json:"last_time_critical"`
 	LastTimeOk                 string            `json:"last_time_ok"`

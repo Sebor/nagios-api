@@ -8,6 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
+// WriteCommand writes command to nagios command file
 func (a *Api) WriteCommand(command string) error {
 	commandToWrite := fmt.Sprintf("[%d] %s\n", time.Now().Unix(), command)
 
