@@ -51,4 +51,5 @@ func (s *Api) buildRoutes() {
 	s.router.Handle("/enable_host_and_child_notifications", chain.Append(auth.AuthHandler).ThenFunc(s.HandleEnableHostandChildNotifications)).Methods("POST")
 	s.router.Handle("/schedule_host_downtime", chain.Append(auth.AuthHandler).ThenFunc(s.HandleScheduleHostDowntime)).Methods("POST")
 	s.router.Handle("/force_service_checks", chain.Append(auth.AuthHandler).ThenFunc(s.HandleScheduleForcedHostServiceChecks)).Methods("POST")
+	s.router.Handle("/force_host_checks", chain.Append(auth.AuthHandler).ThenFunc(s.HandleScheduleForcedHostCheck)).Methods("POST")
 }

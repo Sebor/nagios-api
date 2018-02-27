@@ -600,10 +600,20 @@ func (a *Api) HandleEnableNotifications(w http.ResponseWriter, r *http.Request) 
 // SCHEDULE_FORCED_HOST_CHECK
 // SCHEDULE_FORCED_HOST_CHECK;<host_name>;<check_time>
 func (a *Api) HandleScheduleForcedHostCheck(w http.ResponseWriter, r *http.Request) {
+	decoder := json.NewDecoder(r.Body)
+	var host struct{ Hostname string }
+	err := decoder.Decode(&host)
+	if err != nil {
+		http.Error(w, "Could not decode request body", 400)
+		return
+	}
+
+	command := fmt.Sprintf("%s;%s;[%d]", "SCHEDULE_FORCED_HOST_CHECK", host.Hostname, time.Now().Unix())
+	a.WriteCommandToFile(w, command)
 }
 
 // SCHEDULE_FORCED_HOST_SVC_CHECKS
-// SCHEDULE_FORCED_HOST_SVC_CHECKS;<host_name>;<check_time>
+// POST: /force_service_checks -d '{"hostname": "host_name"}'
 func (a *Api) HandleScheduleForcedHostServiceChecks(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var host struct{ Hostname string }
