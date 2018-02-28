@@ -99,6 +99,7 @@ func (s *Api) spawnRefreshStaticRoutine() {
 	}
 	defer oc.Close()
 	for {
+		log.Println("Refreshing static data from ", s.fileObjectCache)
 		readObjectCache(oc)
 		time.Sleep(5 * time.Minute)
 	}
@@ -231,7 +232,7 @@ func parseBlock(o settableType, objecttype string, lines []string) error {
 }
 
 func (s *Api) refreshStatusDataFile() (*StatusData, error) {
-	log.Println("Refreshig data from ", s.fileStatus)
+	log.Println("Refreshing data from ", s.fileStatus)
 
 	fh, err := os.Open(s.fileStatus)
 	if err != nil {
