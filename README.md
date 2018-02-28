@@ -45,8 +45,27 @@ POST /disable_host_notifications
 POST /enable_host_notifications
 POST /acknowledge_host_problem
 POST /acknowledge_service_problem
-...
-see code for full list of available commands.
+POST /add_host_comment
+POST /add_svc_comment
+POST /del_all_host_comment
+POST /del_all_svc_comment
+POST /del_host_comment
+POST /del_svc_comment
+POST /disable_all_notification_beyond_host
+POST /enable_all_notification_beyond_host
+POST /disable_hostgroup_host_checks
+POST /enable_hostgroup_host_checks
+POST /disable_hostgroup_host_notifications
+POST /enable_hostgroup_host_notifications
+POST /disable_hostgroup_svc_checks
+POST /enable_hostgroup_svc_checks
+POST /disable_hostgroup_svc_notifications
+POST /enable_hostgroup_svc_notifications
+POST /disable_host_and_child_notifications
+POST /enable_host_and_child_notifications
+POST /schedule_host_downtime
+POST /force_service_checks
+POST /force_host_checks
 ```
 
 #### Examples
