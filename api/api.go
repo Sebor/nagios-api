@@ -100,7 +100,10 @@ func (s *Api) spawnRefreshStaticRoutine() {
 	defer oc.Close()
 	for {
 		log.Println("Refreshing static data from ", s.fileObjectCache)
-		readObjectCache(oc)
+		s.staticData, err = readObjectCache(oc)
+		if err != nil {
+			log.Println("Unable to parse object cache file: ", err)
+		}
 		time.Sleep(5 * time.Minute)
 	}
 }
