@@ -93,19 +93,29 @@ func (s *Api) spawnRefreshRoutein() {
 }
 
 func (s *Api) spawnRefreshStaticRoutine() {
-	oc, err := os.Open(s.fileObjectCache)
-	if err != nil {
-		log.Println("Unable to refresh static data: ", err)
-	}
-	defer oc.Close()
 	for {
-		log.Println("Refreshing static data from ", s.fileObjectCache)
-		s.staticData, err = readObjectCache(oc)
+		data, err := s.refreshStaticDataFile()
 		if err != nil {
 			log.Println("Unable to parse object cache file: ", err)
+		} else {
+			s.mutex.Lock()
+			s.staticData = data
+			s.mutex.Unlock()
 		}
 		time.Sleep(5 * time.Minute)
 	}
+}
+
+func (s *Api) refreshStaticDataFile() (*StaticData, error) {
+	log.Println("Refreshing static data from ", s.fileObjectCache)
+
+	fh, err := os.Open(s.fileObjectCache)
+	if err != nil {
+		return nil, err
+	}
+	defer fh.Close()
+
+	return readObjectCache(fh)
 }
 
 func readObjectCache(in io.Reader) (*StaticData, error) {
