@@ -50,6 +50,7 @@ func NewAPI(addr, fileObjectCache, fileCommand, fileStatus string) *Api {
 	return api
 }
 
+// Run runs main programm
 func (s *Api) Run() error {
 	log.Println("Reading object cache from ", s.fileObjectCache)
 	log.Println("Writing commands to ", s.fileCommand)
@@ -65,6 +66,7 @@ func (s *Api) Run() error {
 		return fmt.Errorf("Unable to parse object cache file: %s", err)
 	}
 	go s.spawnRefreshRoutein()
+	go s.spawnRefreshStaticRoutine()
 
 	http.Handle("/", s.router)
 
@@ -87,6 +89,18 @@ func (s *Api) spawnRefreshRoutein() {
 			s.mutex.Unlock()
 		}
 		time.Sleep(60 * time.Second)
+	}
+}
+
+func (s *Api) spawnRefreshStaticRoutine() {
+	oc, err := os.Open(s.fileObjectCache)
+	if err != nil {
+		log.Println("Unable to refresh static data: ", err)
+	}
+	defer oc.Close()
+	for {
+		readObjectCache(oc)
+		time.Sleep(5 * time.Minute)
 	}
 }
 
