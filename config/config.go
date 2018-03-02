@@ -28,7 +28,7 @@ func init() {
 	configfile = flag.String("config", "", "path to config file")
 	objectCacheFile = flag.String("cachefile", "/usr/local/nagios/var/objects.cache", "Nagios object.cache file location")
 	statusFile = flag.String("statusfile", "/usr/local/nagios/var/status.dat", "Nagios status.dat file location")
-	commandFile = flag.String("commandfile", "/usr/local/nagios/var/nagios.cmd", "Nagios command file location")
+	commandFile = flag.String("commandfile", "/usr/local/nagios/var/rw/nagios.cmd", "Nagios command file location")
 	addr = flag.String("addr", ":9090", "The interface and port to run server on")
 	flag.Parse()
 
