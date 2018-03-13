@@ -12,11 +12,11 @@ Installation:
 Run:
 ==
 ```
-$ ./go-nagios-api --addr=:9090 --cachefile=/opt/nagios/object.cache --statusfile=/opt/nagios/status.dat --commandfile=/opt/nagios/nagios.cmd
+$ ./nagios-api --addr=:9090 --cachefile=/opt/nagios/object.cache --statusfile=/opt/nagios/status.dat --commandfile=/opt/nagios/nagios.cmd
 
 Or you can provide a configuration file with these parameter in json format (configuration file overwrites cli flags)
 
-$ ./go-nagios-api --config=nagios-api.json
+$ ./nagios-api --config=nagios-api.json
 ```
 It will start the api service on port 8080. If you wish to change the port simply pass --addr=:80 to make it run on port 80. For running in production see init scripts.
 
@@ -25,6 +25,7 @@ API Calls
 
 #### Hosts and Services
 ```
+ GET /contacts : get all contacts
  GET /hosts : get all configured hosts
  GET /host/<hostname> : get this host
  GET /hoststatus : get all hoststatus
@@ -33,6 +34,7 @@ API Calls
  GET /services : get all configured services
  GET /servicestatus : get all servicestatus
  GET /servicestatus/<servicename> : get service status for this service
+ GET /host/<hostname>/force : schedule force checks for all services of <hostname>
 ```
 
 #### External Commands
@@ -84,5 +86,9 @@ curl -i -XPOST http://127.0.0.1:9090/disable_hostgroup_host_checks -d '{"hostgro
 
 To get details for a given host host1.example.net
 curl -i http://127.0.0.1:9090/host/host1.example.net
+
+To force all services checks for host host1.example.net (there are 2 supported methods: GET and POST)
+curl -i -XPOST http://127.0.0.1:9090/force_service_checks -d '{"hostname": "host1.example.net"}'
+curl -i http://127.0.0.1:9090/host/host1.example.net/force
 ```
 
