@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/sebor/nagios-api/api"
-	"github.com/sebor/nagios-api/config"
+	"github.com/Sebor/nagios-api/api"
+	"github.com/Sebor/nagios-api/config"
 	log "github.com/sirupsen/logrus"
 )
 
