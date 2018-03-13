@@ -23,6 +23,7 @@ func (s *Api) buildRoutes() {
 	s.router.Handle("/servicestatus/{service:[a-z,A-Z,0-9,_.-]+}", chain.Append(auth.AuthHandler).ThenFunc(s.HandleGetServiceStatusForService)).Methods("GET")
 
 	// Nagios External Command Handlers
+	s.router.Handle("/host/{hostname:[a-z,A-Z,0-9, _.-]+}/force", chain.Append(auth.AuthHandler).ThenFunc(s.HandleForcedHostServiceChecks)).Methods("GET")
 	s.router.Handle("/disable_notifications", chain.Append(auth.AuthHandler).ThenFunc(s.HandleDisableNotifications)).Methods("POST")
 	s.router.Handle("/enable_notifications", chain.Append(auth.AuthHandler).ThenFunc(s.HandleEnableNotifications)).Methods("POST")
 	s.router.Handle("/disable_host_check", chain.Append(auth.AuthHandler).ThenFunc(s.HandleDisableHostCheck)).Methods("POST")

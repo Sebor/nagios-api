@@ -454,3 +454,20 @@ func (a *Api) HandleGetHostGroups(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(hg)
 }
+
+// HandleForcedHostServiceChecks executes SCHEDULE_FORCED_HOST_SVC_CHECKS
+// GET: /host/hostname/force
+func (a *Api) HandleForcedHostServiceChecks(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	host, ok := vars["hostname"]
+	if !ok {
+		http.Error(w, "Invalid hostname provided", 400)
+		return
+	}
+
+	a.mutex.RLock()
+	defer a.mutex.RUnlock()
+
+	command := fmt.Sprintf("%s;%s;[%d]", "SCHEDULE_FORCED_HOST_SVC_CHECKS", host, time.Now().Unix())
+	a.WriteCommandToFile(w, command)
+}
